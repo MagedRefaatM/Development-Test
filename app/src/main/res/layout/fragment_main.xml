@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/table_layout_bottom_gl"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.15"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/first_chart_bottom_gl"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.433"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/second_chart_bottom_gl"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.716"/>
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/layout_height"
+        android:stretchColumns="0,1,2"
+        android:gravity="center"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/table_layout_bottom_gl">
+
+    <TableRow
+        android:background="@color/first_row_background_color"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/layout_height"
+        android:layout_weight="3">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="@string/first_value"
+            android:textColor="@color/first_row_values_color"
+            android:layout_margin="@dimen/layout_margin"
+            android:layout_column="0"
+            android:textStyle="bold"
+            android:gravity="center" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="@string/second_value"
+            android:textColor="@color/first_row_values_color"
+            android:layout_margin="@dimen/layout_margin"
+            android:layout_column="1"
+            android:gravity="center"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="@string/third_value"
+            android:textColor="@color/first_row_values_color"
+            android:layout_margin="@dimen/layout_margin"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:layout_column="2" />
+    </TableRow>
+
+    <TableRow
+        android:background="@color/second_row_background_color"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/layout_height"
+        android:layout_weight="0">
+
+        <com.skydoves.progressview.ProgressView
+            android:layout_width="@dimen/progress_width"
+            android:layout_height="@dimen/progress_height"
+            android:layout_margin="@dimen/layout_margin"
+            android:layout_column="0"
+            android:layout_gravity="center_vertical"
+            android:id="@+id/first_value_progress_view"
+            app:progressView_colorBackground="@color/second_row_background_color"
+            app:progressView_min="15"
+            app:progressView_max="100"
+            app:progressView_progress="75"
+            app:progressView_progressFromPrevious="true"
+            app:progressView_autoAnimate="true"
+            app:progressView_labelColorInner="@color/white"
+            app:progressView_labelColorOuter="@color/black"
+            app:progressView_labelSize="@dimen/label_size"
+            app:progressView_labelSpace="@dimen/label_spacing"
+            app:progressView_labelTypeface="bold"
+            app:progressView_labelConstraints="align_container"/>
+
+        <com.skydoves.progressview.ProgressView
+            android:layout_width="@dimen/progress_width"
+            android:layout_height="@dimen/progress_height"
+            android:layout_margin="@dimen/layout_margin"
+            android:layout_column="1"
+            android:layout_gravity="center_vertical"
+            android:id="@+id/second_value_progress_view"
+            app:progressView_colorBackground="@color/second_row_background_color"
+            app:progressView_min="15"
+            app:progressView_max="100"
+            app:progressView_progress="55"
+            app:progressView_progressFromPrevious="true"
+            app:progressView_autoAnimate="true"
+            app:progressView_labelColorInner="@color/white"
+            app:progressView_labelColorOuter="@color/black"
+            app:progressView_labelSize="@dimen/label_size"
+            app:progressView_labelTypeface="bold"
+            app:progressView_labelConstraints="align_container"/>
+
+        <com.skydoves.progressview.ProgressView
+            android:layout_width="@dimen/progress_width"
+            android:layout_height="@dimen/progress_height"
+            android:layout_margin="@dimen/layout_margin"
+            android:layout_column="2"
+            android:layout_gravity="center_vertical"
+            android:id="@+id/third_value_progress_view"
+            app:progressView_colorBackground="@color/second_row_background_color"
+            app:progressView_min="15"
+            app:progressView_max="100"
+            app:progressView_progress="55"
+            app:progressView_progressFromPrevious="true"
+            app:progressView_autoAnimate="true"
+            app:progressView_labelColorInner="@color/white"
+            app:progressView_labelColorOuter="@color/black"
+            app:progressView_labelSize="@dimen/label_size"
+            app:progressView_labelConstraints="align_container"
+            app:progressView_labelTypeface="bold"/>
+    </TableRow>
+    </TableLayout>
+
+    <com.github.mikephil.charting.charts.LineChart
+        android:id="@+id/first_data_chart"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@color/white"
+        app:layout_constraintTop_toBottomOf="@id/table_layout_bottom_gl"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/first_chart_bottom_gl"/>
+
+    <com.github.mikephil.charting.charts.LineChart
+        android:id="@+id/second_data_chart"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@color/white"
+        app:layout_constraintTop_toBottomOf="@id/first_chart_bottom_gl"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/second_chart_bottom_gl"/>
+
+    <com.github.mikephil.charting.charts.LineChart
+        android:id="@+id/third_data_chart"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@color/white"
+        app:layout_constraintTop_toBottomOf="@id/second_chart_bottom_gl"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

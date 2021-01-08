@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Development test</string>
+    <string name="first_value">RSRP</string>
+    <string name="second_value">RSRQ</string>
+    <string name="third_value">SNIR</string>
+    <string name="error">Some Error occurred</string>
+    <string name="dialog_title">Collecting Data</string>
+    <string name="dialog_message">Please wait while the collecting ends</string>
+</resources>
