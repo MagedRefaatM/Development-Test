@@ -7,4 +7,6 @@
     <dimen name="layout_weight">1dp</dimen>
     <dimen name="label_size">20dp</dimen>
     <dimen name="label_spacing">10dp</dimen>
+    <dimen name="margin_bottom">7dp</dimen>
+    <dimen name="margin_top">7dp</dimen>
 </resources>

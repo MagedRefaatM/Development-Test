@@ -8,18 +8,11 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.example.developmenttest.R;
-import com.example.developmenttest.data.LocalDataGetter;
-import com.example.developmenttest.model.entities.Random;
-import com.example.developmenttest.model.network.GetDataService;
-import com.example.developmenttest.model.network.RetrofitClientInstance;
+import com.example.developmenttest.data.network.NetworkDataGetter;
 import com.example.developmenttest.presenter.Presenter;
 import com.example.developmenttest.view.fragment.MainFragment;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-
-public class MainActivity extends AppCompatActivity implements NotifyOnParsingComplete {
+public class MainActivity extends AppCompatActivity implements NotifyOnParsingComplete, NotifyOnCallingFailed {
 
     Presenter presenter;
 
@@ -37,35 +30,7 @@ public class MainActivity extends AppCompatActivity implements NotifyOnParsingCo
 
         presenter = new Presenter(this);
 
-        getRandomFromAPI();
-    }
-
-    private void getRandomFromAPI() {
-
-        GetDataService service = RetrofitClientInstance.getRetrofitInstance().create(GetDataService.class);
-
-        Call<Random> call = service.getRandoms();
-
-        call.enqueue(new Callback<Random>() {
-            @Override
-            public void onResponse(Call<Random> call, Response<Random> response) {
-                Random apiRandom = response.body();
-
-                presenter.setRSRP(apiRandom.getFirstValue());
-                presenter.setRSRQ(apiRandom.getSecondValue());
-                presenter.setSINR(apiRandom.getThirdValue());
-
-                LocalDataGetter dataGetter = new LocalDataGetter();
-                dataGetter.parsingJSON(MainActivity.this, presenter.getOnParsingComplete());
-            }
-
-            @Override
-            public void onFailure(Call<Random> call, Throwable t) {
-                dialog.dismiss();
-                Log.e("Retrofit Error", t.getLocalizedMessage());
-                Toast.makeText(MainActivity.this , R.string.error , Toast.LENGTH_SHORT).show();
-            }
-        });
+        NetworkDataGetter networkDataGetter = new NetworkDataGetter(MainActivity.this, presenter, this);
     }
 
     @Override
@@ -74,18 +39,25 @@ public class MainActivity extends AppCompatActivity implements NotifyOnParsingCo
         transitionToFragment();
     }
 
+    @Override
+    public void onParsingFailed(String message) {
+        dialog.dismiss();
+        Log.e(getString(R.string.retro_error), message);
+        Toast.makeText(MainActivity.this , R.string.error , Toast.LENGTH_SHORT).show();
+    }
+
     private void transitionToFragment() {
         MainFragment mainFragment = new MainFragment();
 
         Bundle bundle = new Bundle();
 
-        bundle.putString("RSRP" , String.valueOf(presenter.getRSRP()));
-        bundle.putString("RSRQ" , String.valueOf(presenter.getRSRQ()));
-        bundle.putString("SINR" , String.valueOf(presenter.getSINR()));
+        bundle.putString(getString(R.string.first_value) , String.valueOf(presenter.getRSRP()));
+        bundle.putString(getString(R.string.second_value) , String.valueOf(presenter.getRSRQ()));
+        bundle.putString(getString(R.string.third_value) , String.valueOf(presenter.getSINR()));
 
-        bundle.putString("progressOneColor", presenter.getFirstProgressColor(presenter.getRSRP()));
-        bundle.putString("progressTwoColor", presenter.getSecondProgressColor(presenter.getRSRQ()));
-        bundle.putString("progressThreeColor", presenter.getThirdProgressColor(presenter.getSINR()));
+        bundle.putString(getString(R.string.progress_one_color), presenter.getFirstProgressColor(presenter.getRSRP()));
+        bundle.putString(getString(R.string.progress_two_color), presenter.getSecondProgressColor(presenter.getRSRQ()));
+        bundle.putString(getString(R.string.progress_three_color), presenter.getThirdProgressColor(presenter.getSINR()));
 
         mainFragment.setArguments(bundle);
 

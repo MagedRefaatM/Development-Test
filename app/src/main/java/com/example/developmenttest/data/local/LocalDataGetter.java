@@ -1,4 +1,4 @@
-package com.example.developmenttest.data;
+package com.example.developmenttest.data.local;
 
 import android.content.Context;
 

@@ -1,19 +1,24 @@
 package com.example.developmenttest.presenter;
 
+import com.example.developmenttest.view.main.NotifyOnCallingFailed;
 import com.example.developmenttest.view.main.NotifyOnParsingComplete;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class Presenter {
 
     private double RSRP;
     private double RSRQ;
     private double SINR;
+    private float maximum = 0;
 
     private static ArrayList<HashMap<String, String>> RSRPItemsList;
     private static ArrayList<HashMap<String, String>> RSRQItemsList;
     private static ArrayList<HashMap<String, String>> SINRItemsList;
+
+    private List<Float> yAxis = new ArrayList<>();
 
     private String progressColor;
 
@@ -80,6 +85,11 @@ public class Presenter {
 
     public NotifyOnParsingComplete getOnParsingComplete() {
         return onParsingComplete;
+    }
+
+    public void checkCallingFailureState(boolean state, NotifyOnCallingFailed notifyOnCallingFailed, String message){
+        if (state)
+            notifyOnCallingFailed.onParsingFailed(message);
     }
 
     public String getFirstProgressColor(double value){

@@ -3,7 +3,20 @@
     <string name="first_value">RSRP</string>
     <string name="second_value">RSRQ</string>
     <string name="third_value">SNIR</string>
+    <string name="retro_error">Retrofit Error</string>
     <string name="error">Some Error occurred</string>
     <string name="dialog_title">Collecting Data</string>
     <string name="dialog_message">Please wait while the collecting ends</string>
+    <string name="progress_one_color">progressOneColor</string>
+    <string name="progress_two_color">progressTwoColor</string>
+    <string name="progress_three_color">progressThreeColor</string>
+    <string name="first_chart_line1">RSRP P</string>
+    <string name="first_chart_line2">RSRP S1</string>
+    <string name="first_chart_line3">RSRP S2</string>
+    <string name="second_chart_line1">RSRQ P</string>
+    <string name="second_chart_line2">RSRQ S1</string>
+    <string name="second_chart_line3">RSRQ S2</string>
+    <string name="third_chart_line1">SINR P</string>
+    <string name="third_chart_line2">SINR S1</string>
+    <string name="third_chart_line3">SINR S2</string>
 </resources>
